@@ -3,9 +3,9 @@ package bank;
 public class Accounts {
   private int id;
   private String type;
-  private Float balance;
+  private float balance;
 
-  public Accounts() {
+  public Accounts(int id, String type, float balance) {
     setId(id);
     setType(type);
     setBalance(balance);
@@ -31,8 +31,15 @@ public class Accounts {
     return this.balance;
   }
 
-  public void setBalance(Float balance) {
+  public void setBalance(float balance) {
     this.balance = balance;
+  }
+
+  public void deposit(double ammount){
+
+  }
+  public void withdraw(double ammount){
+    
   }
 
 }
