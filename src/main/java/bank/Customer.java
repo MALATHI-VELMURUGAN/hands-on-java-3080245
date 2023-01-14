@@ -6,13 +6,14 @@ public class Customer {
   private String userName;
   private String password;
   private int accountId;
-
+  private boolean Authenticate;
   public Customer(int id, String name, String userName, String password, int accountId) {
     setId(id);
     setName(name);
     setUserName(userName);
     setPassword(password);
     setAccountId(accountId);
+    setAuthenticate(false);
   }
 
   public int getId() {
@@ -53,6 +54,14 @@ public class Customer {
 
   public void setAccountId(int accountId) {
     this.accountId = accountId;
+  }
+
+  public boolean isAuthenticate() {
+    return this.Authenticate;
+  }
+
+  public void setAuthenticate(boolean Authenticate) {
+    this.Authenticate = Authenticate;
   }
 
 }
