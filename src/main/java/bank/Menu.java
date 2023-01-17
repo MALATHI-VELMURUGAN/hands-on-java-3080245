@@ -14,7 +14,7 @@ public class Menu {
     menu.scanner = new Scanner(System.in);// initiallizing scanner to get input from input stream
     Customer customer = menu.authenticateUser();
     if(customer != null){
-      Accounts account = DataSource.getAccounts(customer.getId());
+      Accounts account = DataSource.getAccounts(customer.getAccountId());
       menu.showMenu(customer, account);
     }
 
@@ -60,7 +60,12 @@ public class Menu {
         case 2:
               System.out.println("How much money you want to withdraw?");
               ammount = scanner.nextDouble();
+              try{
               account.withdraw(ammount);
+              }catch(AmountException e){
+                System.out.println(e.getMessage());
+                System.out.println("Something went wrong. Please try again");
+              }
               break;
         case 3: 
               System.out.println("Your account balance is:"+ account.getBalance());
