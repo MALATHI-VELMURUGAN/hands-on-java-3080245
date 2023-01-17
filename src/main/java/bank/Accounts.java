@@ -44,11 +44,22 @@ public class Accounts {
     else{
       double newBalance = balance + ammount;
       setBalance(newBalance);
+      DataSource.updateAccountBalance(id, newBalance);
     }
 
   }
-  public void withdraw(double ammount){
-    
+  public void withdraw(double ammount) throws AmountException{
+    if(ammount<0){
+      throw new AmountException("The withdrawal ammount is invalid");
+    }
+    else if(ammount>getBalance()){
+      throw new AmountException("You donot have sufficient funds in your account");
+    }
+    else{
+      double newBalance = balance - ammount;
+      setBalance(newBalance);
+      DataSource.updateAccountBalance(id, newBalance);
+    }
   }
 
 }
