@@ -45,17 +45,30 @@ public static Accounts getAccounts(int id){
    try(ResultSet resultSet = statement.executeQuery()){
     accounts = new Accounts(resultSet.getInt("id"),
                             resultSet.getString("type"),
-                            resultSet.getFloat("balance"));
+                            resultSet.getDouble("balance"));
    }
   }catch(Exception e){
     e.printStackTrace();
   }
   return accounts;
 }
-  public static void main(String[] args) {
-    // Customer customer = getCustomer("twest8o@friendfeed.com");
-    // System.out.println(customer.getName()); 
-    Accounts accounts = getAccounts(14067);
-    System.out.println(accounts.getBalance());
+public static void updateAccountBalance (int accountId, double newBalance){
+  String sql = "update accounts set balance = ? where id = ?";//updating the new balance to the database
+  try(
+    Connection connection = connect();// creating connection to the database
+    PreparedStatement statement = connection.prepareStatement(sql)//precompiling the sql query
+  ){
+    statement.setDouble(1, newBalance);
+    statement.setInt(2, accountId);
+    statement.executeUpdate();//instead of execute query we do execute update for updating the database
+  }catch(SQLException e){
+    e.printStackTrace();
   }
+}
+  // public static void main(String[] args) {
+  //   // Customer customer = getCustomer("twest8o@friendfeed.com");
+  //   // System.out.println(customer.getName()); 
+  //   Accounts accounts = getAccounts(14067);
+  //   System.out.println(accounts.getBalance());
+  // }
 }
