@@ -1,11 +1,13 @@
 package bank;
 
+import bank.exceptions.AmountException;
+
 public class Accounts {
   private int id;
   private String type;
-  private float balance;
+  private double balance;
 
-  public Accounts(int id, String type, float balance) {
+  public Accounts(int id, String type, double balance) {
     setId(id);
     setType(type);
     setBalance(balance);
@@ -27,15 +29,22 @@ public class Accounts {
     this.type = type;
   }
 
-  public Float getBalance() {
+  public double getBalance() {
     return this.balance;
   }
 
-  public void setBalance(float balance) {
+  public void setBalance(double balance) {
     this.balance = balance;
   }
 
-  public void deposit(double ammount){
+  public void deposit(double ammount) throws AmountException{
+    if(ammount<1){
+      throw new AmountException("Minimum ammount can't be deposited");
+    }
+    else{
+      double newBalance = balance + ammount;
+      setBalance(newBalance);
+    }
 
   }
   public void withdraw(double ammount){
